@@ -29,7 +29,7 @@ RUN apt-get install -y \
 	&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
 	&& pecl install imagick \
 	&& docker-php-ext-enable imagick \
-	&& rm -r /var/lib/apt/lists/*
+	&& rm -r /var/lib/apt/lists/* \
 	&& curl -sS https://getcomposer.org/installer | php \
 	&& mv composer.phar /usr/bin/composer \
 	&& pecl install xdebug \
