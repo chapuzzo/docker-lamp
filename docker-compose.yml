@@ -1,18 +1,37 @@
 web:
-    build: apache
-    links:
-        - db
-        - mail
-    ports:
-        - "80:80"
-    volumes:
-        - ./www:/var/www/html
+  build: apache
+  links:
+    - db
+    - mail
+  ports:
+    - "80:80"
+    - "8000:8000"
+  volumes:
+    - ./www:/var/www/html
 mail:
     image: mailhog/mailhog
     ports:
-        - "1025:1025"
-        - "8025:8025"
+      - "1025:1025"
+      - "8025:8025"
 db:
     build: mysql
     ports:
-        - "3306:3306"
+      - "3306:3306"
+phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - "8080:80"
+    links:
+      - db
+notifications:
+    build: notifications
+    links:
+      - mongo
+    ports:
+      - '3000:3000'
+mongo:
+    image: mongo
+    ports:
+      - '27018:27017'
