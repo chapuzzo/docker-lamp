@@ -1,4 +1,4 @@
-FROM php:7-apache
+FROM php:5-apache
 RUN useradd -u 1000 -m www-bridge-user
 
 RUN apt-get update && curl -sL https://deb.nodesource.com/setup_4.x | bash -
@@ -35,7 +35,11 @@ RUN apt-get install -y \
 	&& pecl install xdebug \
 	&& a2enmod rewrite
 
+RUN npm install -g uglifyjs uglifycss less
+
 ADD templates/apache2.conf /etc/apache2/
 ADD templates/php.ini /usr/local/etc/php/
 ADD templates/ssmtp.conf /etc/ssmtp/
 ADD templates/xdebug.ini /usr/local/etc/php/conf.d/
+
+
