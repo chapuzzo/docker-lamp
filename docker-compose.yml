@@ -25,13 +25,3 @@ phpmyadmin:
       - "8080:80"
     links:
       - db
-notifications:
-    build: notifications
-    links:
-      - mongo
-    ports:
-      - '3000:3000'
-mongo:
-    image: mongo
-    ports:
-      - '27018:27017'
